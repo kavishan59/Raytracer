@@ -1,5 +1,4 @@
-#ifndef VEC3_H
-#define VEC3_H
+#pragma once
 
 #include <cmath>
 #include <iostream>
@@ -76,4 +75,3 @@ double dot(const vec3& u, const vec3& v);
 vec3 cross(const vec3& u, const vec3& v); 
 vec3 unit_vector(const vec3& v); 
 
-#endif
