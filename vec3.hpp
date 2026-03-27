@@ -62,6 +62,14 @@ public :
 
 };
 
+//aliases for clarity
+
+using color = vec3;
+using point3 = vec3;
+
+
+
+
 //prototypes
 
 std::ostream& operator<<(std::ostream& out, const vec3& v); 
