@@ -25,7 +25,7 @@ int main (int argc, char *argv[]) {
 
   auto material_ground = std::make_shared<lambertian>(color(0.8,0.8,0.0));
   auto material_center = std::make_shared<lambertian>(color(0.1,0.2,0.5));
-  auto material_left = std::make_shared<metal>(color(0.8,0.8,0.8), 0.3);
+  auto material_left = std::make_shared<dialectric>(1.5);
   auto material_right = std::make_shared<metal>(color(0.8,0.6,0.2), 0.0);
   
 
