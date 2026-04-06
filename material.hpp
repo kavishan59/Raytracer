@@ -2,7 +2,11 @@
 
 #include "hittable.hpp"
 #include "ray.hpp"
+#include "rt_const_util.hpp"
 #include "vec3.hpp"
+
+
+
 
 class material {
 public:
@@ -60,9 +64,18 @@ public:
     double ri = rec.front_face ? (1.0/refraction_index) : refraction_index;
 
     vec3 unit_direction = unit_vector(r_in.direction());
-    vec3 refracted = refract(unit_direction, rec.normal, ri);
+    double cos_theta = std::fmin(dot(-unit_direction, rec.normal), 1.0);
+    double sin_theta = std::sqrt(1.0 - cos_theta*cos_theta);
+
+    bool cannot_refract = ri * sin_theta > 1.0;
+    vec3 direction;
+
+    if (cannot_refract || reflectance(cos_theta, ri) > random_double())
+      direction = reflect(unit_direction, rec.normal);
+    else
+      direction= refract(unit_direction, rec.normal, ri);
   
-    scattered = ray(rec.p, refracted);
+    scattered = ray(rec.p, direction);
     return true;
   }
 
@@ -70,5 +83,12 @@ private:
   // Refractive index in vacuum or air, or the ratio of the material's refractive index over
   // the refractive index of the enclosing media
   double refraction_index;
+
+  static double reflectance(double cosine, double refraction_index){
+    //use schlick approximation for reflectance
+    auto r0 = (1 - refraction_index) / (1 + refraction_index);
+    r0 = r0 * r0;
+    return r0 + (1-r0)*std::pow((1 - cosine),5);
+  }
 
 };
