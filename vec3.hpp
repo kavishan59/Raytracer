@@ -60,6 +60,12 @@ public :
     return (e[0]*e[0] + e[1]*e[1] + e[2]*e[2]);
   }
 
+  bool near_zero() const {
+    //return true if the vector is close to zero in all dimension
+    auto s = 1e-8;
+    return (std::fabs(e[0]) < s) && (std::fabs(e[1]) < s) && (std::fabs(e[2]) < s);
+  }
+  
   static vec3 random();
 
 
@@ -87,4 +93,5 @@ double dot(const vec3& u, const vec3& v);
 vec3 cross(const vec3& u, const vec3& v); 
 vec3 unit_vector(const vec3& v); 
 vec3 random_unit_vector();
-vec3 random_on_hemisphere(const vec3& normal); 
+vec3 random_on_hemisphere(const vec3& normal);
+vec3 reflect(const vec3& v, const vec3& n);
