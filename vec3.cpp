@@ -1,4 +1,5 @@
-#include "vec3.hpp"
+#include "rt_const_util.hpp"
+#include <cmath>
 
 
 //vector utlity Functions
@@ -42,4 +43,31 @@ vec3 cross(const vec3& u, const vec3& v) {
 
 vec3 unit_vector(const vec3& v) {
   return v / v.length();
+}
+
+vec3 vec3::random() {
+    return vec3(random_double(), random_double(), random_double());
+}
+
+vec3 vec3::random(double min, double max) {
+    return vec3(random_double(min,max), random_double(min,max), random_double(min, max));
+}
+
+
+//random unit vector but inside an unit sphere ( x^2 + y^2 + z^2 <= 1)
+vec3 random_unit_vector() {
+  while (true) {
+    auto p = vec3::random(-1,1);
+    auto lensq = p.length_squared();
+    if (1e-160 < lensq && lensq <= 1)
+      return p/sqrt(lensq);
+  }
+}
+
+vec3 random_on_hemisphere(const vec3& normal) {
+  vec3 on_unit_sphere = random_unit_vector();
+  if (dot(on_unit_sphere,normal) > 0.0)  // in the same hemisphere as normal
+    return on_unit_sphere;
+  else
+    return -on_unit_sphere;
 }

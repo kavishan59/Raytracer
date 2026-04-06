@@ -1,6 +1,6 @@
 #pragma once
 
-#include "vec3.hpp"
+#include "rt_const_util.hpp"
 
 class ray {
 

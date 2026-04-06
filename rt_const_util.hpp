@@ -1,5 +1,6 @@
 #pragma once
 
+
 #include <cmath>
 #include <iostream>
 #include <limits>
@@ -29,8 +30,8 @@ inline double random_double(double min, double max){
 }
 
 //common headers
-
+#include "vec3.hpp"
 #include "color.hpp"
 #include "ray.hpp"
-#include "vec3.hpp"
 #include "interval.hpp"
+

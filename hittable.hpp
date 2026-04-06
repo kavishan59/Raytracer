@@ -1,5 +1,6 @@
 #pragma once
 
+#include "rt_const_util.hpp"
 #include "ray.hpp"
 #include "interval.hpp"
 
