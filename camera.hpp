@@ -1,6 +1,9 @@
 #pragma once
 
 #include "hittable.hpp"
+#include "file.hpp"
+#include "rt_const_util.hpp"
+#include <fstream>
 
 class camera {
 
@@ -8,10 +11,10 @@ public:
   double aspect_ratio = 1.0;
   int image_width = 100;
 
-  void render(const hittable& world){
+  void render(const hittable& world, std::ofstream& file){
     initialize();
 
-    std::cout << "P3\n" << image_width << " " << image_height << "\n255\n";
+    file << "P3\n" << image_width << " " << image_height << "\n255\n";
     
     for(int j = 0; j < image_height; j++){
       std::clog << "\rScanlines remaining: " << (image_height - j) << ' ' << std::flush;
@@ -21,7 +24,7 @@ public:
         ray r(center, ray_direction);
 
         color pixel_color = ray_color(r,world);
-        write_color(std::cout, pixel_color);
+        write_color(file, pixel_color);
       }
     }
     std::clog << "\rDone.             \n";

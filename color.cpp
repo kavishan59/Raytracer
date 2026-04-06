@@ -1,6 +1,9 @@
 #include "color.hpp"
+#include <fstream>
 
-void write_color(std::ostream& out, const color& pixel_color) {
+
+
+void write_color(std::ofstream& file, const color& pixel_color) {
   auto r = pixel_color.x();
   auto g = pixel_color.y();
   auto b = pixel_color.z();
@@ -11,5 +14,5 @@ void write_color(std::ostream& out, const color& pixel_color) {
   int bbyte = int(255.999 * b);
   
   //write pixel_color
-  out << rbyte << ' ' << gbyte << ' ' << bbyte << '\n';
+  file << rbyte << ' ' << gbyte << ' ' << bbyte << '\n';
 }
