@@ -44,10 +44,13 @@ int main (int argc, char *argv[]) {
   cam.samples_per_pixel = 100;
   cam.max_depth = 50;
 
-  cam.vfov = 90;
+  cam.vfov = 60;
   cam.lookfrom = point3(-2,2,1);
   cam.lookat = point3(0,0,-1);
   cam.vup = vec3(0,1,0);
+
+  cam.defocus_angle = 0.0;
+  cam.focus_dist = 3.4;
 
   cam.render(world,file);
   file.close();
